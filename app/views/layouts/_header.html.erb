@@ -1,0 +1,11 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Settings", edit_user_path(current_user.id)%></li>
+        <li><%= link_to "SMTPs configuration",    user_smtps_path %></li>
+        <li><%= link_to "Category",    categories_path %></li>
+      </ul>
+    </nav>
+  </div>
+</header>
