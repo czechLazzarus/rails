@@ -1,0 +1,42 @@
+<%= form_with(model: user_smtp, local: true) do |form| %>
+  <% if user_smtp.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user_smtp.errors.count, "error") %> prohibited this user_smtp from being saved:</h2>
+
+      <ul>
+      <% user_smtp.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username, id: :user_smtp_username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :smtp %>
+    <%= form.text_field :smtp, id: :user_smtp_smtp %>
+  </div>
+
+  <div class="field">
+    <%= form.label :port %>
+    <%= form.number_field :port, id: :user_smtp_port %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protocol %>
+    <%= form.text_field :protocol, id: :user_smtp_protocol %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password, id: :user_smtp_password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

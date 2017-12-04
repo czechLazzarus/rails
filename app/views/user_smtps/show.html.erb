@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user_smtp.username %>
+</p>
+
+<p>
+  <strong>Smtp:</strong>
+  <%= @user_smtp.smtp %>
+</p>
+
+<p>
+  <strong>Port:</strong>
+  <%= @user_smtp.port %>
+</p>
+
+<p>
+  <strong>Protocol:</strong>
+  <%= @user_smtp.protocol %>
+</p>
+
+<p>
+  <strong>Password:</strong>
+  <%= @user_smtp.password %>
+</p>
+
+<%= link_to 'Edit', edit_user_smtp_path(@user_smtp) %> |
+<%= link_to 'Back', user_smtps_path %>
