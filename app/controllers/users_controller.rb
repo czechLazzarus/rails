@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :require_login , only: [:new, :create]
+  include SessionsHelper
+  layout :products_layout
 
   # GET /users
   # GET /users.json
@@ -71,5 +73,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:username, :firstname, :surname, :password, :password_confirmation)
+    end
+
+    def products_layout
+      current_user ? "application" : "signup"
     end
 end
