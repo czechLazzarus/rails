@@ -24,7 +24,7 @@ class UserSmtpsController < ApplicationController
   # POST /user_smtps
   # POST /user_smtps.json
   def create
-    @user_smtp = UserSmtp.new(user_smtp_params)
+    @user_smtp = UserSmtp.new(user_smtp_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @user_smtp.save
@@ -41,7 +41,7 @@ class UserSmtpsController < ApplicationController
   # PATCH/PUT /user_smtps/1.json
   def update
     respond_to do |format|
-      if @user_smtp.update(user_smtp_params)
+      if @user_smtp.update(user_smtp_params.merge(user_id: current_user.id))
         format.html { redirect_to @user_smtp, notice: 'User smtp was successfully updated.' }
         format.json { render :show, status: :ok, location: @user_smtp }
       else
@@ -69,6 +69,6 @@ class UserSmtpsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_smtp_params
-      params.require(:user_smtp).permit(:username, :smtp, :port, :protocol, :password)
+      params.require(:user_smtp).permit(:username, :smtp, :port, :protocol, :password, :email, :user_id)
     end
 end

@@ -27,6 +27,13 @@
     <%= form.text_field :surname, id: :user_surname, class: 'form-control' %>
   </div>
 
+  <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
+    <div class="field">
+      <%= form.label :user_smtp_id %><br>
+      <%= form.select :user_smtp_id, UserSmtp.where(:user_id => current_user.id).collect { |f| [f.username, f.id] } %>
+    </div>
+  <% end %>
+
   <div class="field">
     <%= form.label :password %>
     <%= form.password_field :password, class: 'form-control'%>
@@ -36,6 +43,7 @@
     <%= form.label :password_confirmation %>
     <%= form.password_field :password_confirmation, class: 'form-control' %>
   </div>
+
 
     <div class="actions">
     <%= form.submit %>

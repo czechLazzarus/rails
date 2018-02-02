@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171204070431) do
+ActiveRecord::Schema.define(version: 20171214174536) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20171204070431) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "email"
     t.index ["user_id"], name: "index_user_smtps_on_user_id"
   end
 
@@ -39,9 +40,9 @@ ActiveRecord::Schema.define(version: 20171204070431) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "password_digest"
+    t.integer "user_smtp_id"
+    t.index ["user_smtp_id"], name: "index_users_on_user_smtp_id"
     t.index ["username"], name: "index_users_on_username", unique: true
-    t.index ["username"], name: "sqlite_autoindex_users_1", unique: true
-    t.index [nil], name: "index_users_on_email", unique: true
   end
 
 end
