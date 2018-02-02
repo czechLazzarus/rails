@@ -1,0 +1,2 @@
+class CategoriesContact < ApplicationRecord
+end

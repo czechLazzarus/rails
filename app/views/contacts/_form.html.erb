@@ -1,0 +1,56 @@
+<%= form_with(model: contact, local: true) do |form| %>
+  <% if contact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
+
+      <ul>
+      <% contact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :surname %>
+    <%= form.text_field :surname, id: :contact_surname %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :contact_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email, id: :contact_email %>
+  </div>
+  <div class="field">
+    <%= form.label :category %><br>
+    <% Category.where(:user_id => current_user.id).collect do |value| %>
+      <% result = false %>
+      <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
+        <% result = CategoriesContact.where(:contact_id => contact.id, :category_id => value.id).any? %>
+      <% end %>
+      value.name
+      <%= form.check_box(:contact_category, { :multiple => true, :checked => result }, value.id) %>
+    <% end %>
+
+  </div>
+  <textarea id="edit" name="content"></textarea>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+  <script>
+      $(function() {
+          $('#edit').froalaEditor({
+              // Set the image upload URL.
+              imageUploadURL: '/upload_image',
+
+              imageUploadParams: {
+                  id: 'my_editor'
+              }
+          })
+      });
+  </script>
+<% end %>
