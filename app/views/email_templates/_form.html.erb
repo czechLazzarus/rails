@@ -1,0 +1,44 @@
+<%= form_with(model: email_template, local: true) do |form| %>
+  <% if email_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(email_template.errors.count, "error") %> prohibited this email_template from being saved:</h2>
+
+      <ul>
+      <% email_template.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject, id: :email_template_subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sender %>
+    <%= form.text_field :sender, id: :email_template_sender %>
+  </div>
+
+  <div class="field">
+    <%= form.label :text %>
+    <textarea name="email_template[text]" class="froala" id="<%= :email_template_text %>"></textarea>
+  </div>
+
+  <div class="field">
+    <%= form.label :category %><br>
+    <% Category.where(:user_id => current_user.id).collect do |value| %>
+      <% result = false %>
+      <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
+        <% result = CategoriesEmailTemplate.where(:email_template_id => email_template.id, :category_id => value.id).any? %>
+      <% end %>
+      <%= value.name %>
+      <%= form.check_box(:email_template_category, { :multiple => true, :checked => result }, value.id) %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

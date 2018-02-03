@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/signup',  to: 'users#new'
   get '/' => "main#index"
 
+  resources :emails
+  resources :email_templates
   resources :categories
   resources :user_smtps
   resources :users

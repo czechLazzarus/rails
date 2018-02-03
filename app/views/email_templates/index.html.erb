@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Email Templates</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Sender</th>
+      <% Category.where(:user_id => current_user.id).collect do |value| %>
+        <th> <%= value.name %> </th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @email_templates.each do |email_template| %>
+      <tr>
+        <td><%= email_template.subject %></td>
+        <td><%= email_template.sender %></td>
+        <% Category.where(:user_id => current_user.id).collect do |category| %>
+          <% found = false %>
+          <% CategoriesEmailTemplate.where(:email_template_id => email_template.id).collect do |value| %>
+            <% if value.email_template_id == email_template.id && value.category_id == category.id %>
+              <% found = true %>
+              <td> <%= image_tag "registred.png", height: '20', width: '20' %> </td>
+            <% end %>
+          <% end %>
+          <% unless found %>
+            <td>  <%= image_tag "not_registred.png", height: '20', width: '20' %>   </td>
+          <% end %>
+        <% end %>
+
+        <td><%= link_to 'Edit', edit_email_template_path(email_template) %></td>
+        <td><%= link_to 'Destroy', email_template, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Email Template', new_email_template_path %>

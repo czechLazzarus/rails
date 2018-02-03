@@ -55,6 +55,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
+    remove_category_dependencies
     @category.destroy
     respond_to do |format|
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
@@ -63,13 +64,19 @@ class CategoriesController < ApplicationController
   end
 
   private
+
+  def remove_category_dependencies
+    CategoriesContact.where(category_id: @category.id).destroy_all
+    CategoriesEmailTemplate.where(category_id: @category.id).destroy_all
+  end
+  
     # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(:name)
-    end
+  def category_params
+    params.require(:category).permit(:name)
+  end
 end

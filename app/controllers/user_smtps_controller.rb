@@ -1,5 +1,5 @@
 class UserSmtpsController < ApplicationController
-  before_action :set_user_smtp, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_smtp, only: %i[show edit update destroy]
 
   # GET /user_smtps
   # GET /user_smtps.json
@@ -56,19 +56,19 @@ class UserSmtpsController < ApplicationController
   def destroy
     @user_smtp.destroy
     respond_to do |format|
-      format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully destroyed.' }
+      format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully destroyed.'}
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_smtp
-      @user_smtp = UserSmtp.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_smtp
+    @user_smtp = UserSmtp.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_smtp_params
-      params.require(:user_smtp).permit(:username, :smtp, :port, :protocol, :password, :email, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_smtp_params
+    params.require(:user_smtp).permit(:username, :smtp, :port, :protocol, :password, :email, :user_id)
+  end
 end

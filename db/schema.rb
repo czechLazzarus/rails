@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202192255) do
+ActiveRecord::Schema.define(version: 20180203221453) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -27,10 +27,45 @@ ActiveRecord::Schema.define(version: 20180202192255) do
     t.index ["contact_id", "category_id"], name: "index_categories_contacts_on_contact_id_and_category_id"
   end
 
+  create_table "categories_email_templates", force: :cascade do |t|
+    t.integer "email_template_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "contacts", force: :cascade do |t|
     t.string "surname"
     t.string "name"
     t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contacts_emails", force: :cascade do |t|
+    t.integer "email_id"
+    t.integer "contact_id"
+    t.boolean "sended"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string "subject"
+    t.text "text"
+    t.string "sender"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string "subject"
+    t.string "text"
+    t.string "plain_text"
+    t.string "sender"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

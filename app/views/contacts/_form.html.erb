@@ -32,25 +32,12 @@
       <% if controller.action_name == 'edit' || controller.action_name == 'update' %>
         <% result = CategoriesContact.where(:contact_id => contact.id, :category_id => value.id).any? %>
       <% end %>
-      value.name
+      <%= value.name %>
       <%= form.check_box(:contact_category, { :multiple => true, :checked => result }, value.id) %>
     <% end %>
-
   </div>
-  <textarea id="edit" name="content"></textarea>
+
   <div class="actions">
     <%= form.submit %>
   </div>
-  <script>
-      $(function() {
-          $('#edit').froalaEditor({
-              // Set the image upload URL.
-              imageUploadURL: '/upload_image',
-
-              imageUploadParams: {
-                  id: 'my_editor'
-              }
-          })
-      });
-  </script>
 <% end %>

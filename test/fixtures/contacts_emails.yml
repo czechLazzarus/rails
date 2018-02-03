@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email_id: 1
+  contact_id: 1
+  sended: false
+
+two:
+  email_id: 1
+  contact_id: 1
+  sended: false
