@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Unsubscribe page</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <h1 class="text-muted">Unsubscribe page</h1>
+    </div>
+  </header>
+  <div class="content" style="margin-top: 100px">
+    <%= yield %>
+  </div>
+  </body>
+</html>

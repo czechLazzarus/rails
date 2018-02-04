@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :text %>
-    <textarea name="email_template[text]" class="froala" id="<%= :email_template_text %>"></textarea>
+    <%= form.text_area :text, :class => "froala"%>
   </div>
 
   <div class="field">

@@ -2,6 +2,8 @@ require 'test_helper'
 
 class ContactsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:testuser)
+    post login_path, params: { session: { username:  @user.username, password: '123456' } }
     @contact = contacts(:one)
   end
 
@@ -17,7 +19,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create contact" do
     assert_difference('Contact.count') do
-      post contacts_url, params: { contact: { email: @contact.email, name: @contact.name, surname: @contact.surname } }
+      post contacts_url, params: { contact: { email: @contact.email, name: @contact.name, surname: @contact.surname, contact_category: ["0", "0"] } }
     end
 
     assert_redirected_to contact_url(Contact.last)
@@ -34,7 +36,7 @@ class ContactsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update contact" do
-    patch contact_url(@contact), params: { contact: { email: @contact.email, name: @contact.name, surname: @contact.surname } }
+    patch contact_url(@contact), params: { contact: { email: @contact.email, name: @contact.name, surname: @contact.surname, contact_category: ["0", "0"] } }
     assert_redirected_to contact_url(@contact)
   end
 

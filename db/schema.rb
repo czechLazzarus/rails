@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203221453) do
+ActiveRecord::Schema.define(version: 20180204211856) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -49,12 +49,15 @@ ActiveRecord::Schema.define(version: 20180203221453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.boolean "error"
   end
 
   create_table "email_templates", force: :cascade do |t|
     t.string "subject"
-    t.text "text"
+    t.string "text"
+    t.string "plain_text"
     t.string "sender"
+    t.string "footer"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -65,7 +68,13 @@ ActiveRecord::Schema.define(version: 20180203221453) do
     t.string "text"
     t.string "plain_text"
     t.string "sender"
+    t.string "footer"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "senders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

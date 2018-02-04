@@ -2,6 +2,9 @@ require 'test_helper'
 
 class EmailsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @user = users(:testuser)
+    post login_path, params: { session: { username:  @user.username, password: '123456' } }
+    @email_template = email_templates(:one)
     @email = emails(:one)
   end
 
@@ -17,7 +20,7 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create email" do
     assert_difference('Email.count') do
-      post emails_url, params: { email: { footer: @email.footer, plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id } }
+      post emails_url, params: { email: { plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id, email_template_id: @email_template.id } }
     end
 
     assert_redirected_to email_url(Email.last)
@@ -34,7 +37,7 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update email" do
-    patch email_url(@email), params: { email: { footer: @email.footer, plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id } }
+    patch email_url(@email), params: { email: { plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id, email_template_id: @email_template.id } }
     assert_redirected_to email_url(@email)
   end
 

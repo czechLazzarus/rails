@@ -2,7 +2,8 @@
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
 # http://en.wikipedia.org/wiki/Cron
+set :output, "#{path}/log/cron.log"
 
 every 20.minutes do
-  runner "Sender.send_email_package"
+  rake 'email:send'
 end

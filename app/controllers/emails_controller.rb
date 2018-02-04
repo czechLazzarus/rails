@@ -4,7 +4,6 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    send_email_package
     @emails = Email.all
   end
 
@@ -83,6 +82,7 @@ class EmailsController < ApplicationController
           @contactEmail.email_id = @email.id
           @contactEmail.user_id = current_user.id
           @contactEmail.sended = false
+          @contactEmail.error = false
           @contactEmail.save
         end
       end
