@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   subject: MyString
   text: MyString
   plain_text: MyString
@@ -8,6 +9,7 @@ one:
   user_id: 1
 
 two:
+  id: 2
   subject: MyString
   text: MyString
   plain_text: MyString

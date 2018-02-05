@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180204211856) do
+ActiveRecord::Schema.define(version: 20180205170354) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180204211856) do
     t.index ["user_id"], name: "index_categories_on_user_id"
   end
 
-  create_table "categories_contacts", id: false, force: :cascade do |t|
+  create_table "categories_contacts", force: :cascade do |t|
     t.integer "contact_id", null: false
     t.integer "category_id", null: false
     t.index ["category_id", "contact_id"], name: "index_categories_contacts_on_category_id_and_contact_id"
@@ -54,10 +54,8 @@ ActiveRecord::Schema.define(version: 20180204211856) do
 
   create_table "email_templates", force: :cascade do |t|
     t.string "subject"
-    t.string "text"
-    t.string "plain_text"
+    t.text "text"
     t.string "sender"
-    t.string "footer"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,13 +66,7 @@ ActiveRecord::Schema.define(version: 20180204211856) do
     t.string "text"
     t.string "plain_text"
     t.string "sender"
-    t.string "footer"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "senders", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

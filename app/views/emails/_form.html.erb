@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field" style="margin-top: 10px; margin-bottom: 10px">
     <%= form.label :email_template_id %><br>
     <%= form.select :email_template_id, EmailTemplate.where(:user_id => current_user.id).collect { |f| [f.subject, f.id] } %>
   </div>

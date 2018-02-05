@@ -4,21 +4,18 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.paginate(:page => params[:page], :per_page => 10)
+    @contacts = Contact.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+    redirect_to action: 'edit'
   end
 
   # GET /contacts/new
   def new
     @contact = Contact.new
-  end
-
-  # GET /contacts/1/edit
-  def edit
   end
 
   # POST /contacts
@@ -28,7 +25,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         update_contact_category
-        format.html { redirect_to contacts_url, notice: 'Contact was successfully created.' }
+        format.html { redirect_to contacts_url, notice: 'Contact was created.' }
         format.json { render :index, status: :created }
       else
         format.html { render :new }
@@ -43,7 +40,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.update(contact_params)
         update_contact_category
-        format.html { redirect_to contacts_url, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to contacts_url, notice: 'Contact was updated.' }
         format.json { render :index, status: :ok }
       else
         format.html { render :edit }
@@ -58,13 +55,13 @@ class ContactsController < ApplicationController
     remove_contacts_dependencies
     @contact.destroy
     respond_to do |format|
-      format.html { redirect_to contacts_url, notice: 'Contact was successfully destroyed.' }
+      format.html { redirect_to contacts_url, notice: 'Contact was destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_contact
     @contact = Contact.find(params[:id])
   end
@@ -73,7 +70,6 @@ class ContactsController < ApplicationController
     CategoriesContact.where(contact_id: @contact.id).delete_all
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def contact_params
     params.require(:contact).permit(:surname, :name, :email, :category_id)
   end

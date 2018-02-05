@@ -4,7 +4,7 @@ class UserCategoriesTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:testuser)
-    post login_path, params: { session: { username:  @user.username, password: '123456' } }
+    post login_path, params: { session: { username: @user.username, password: '123456' } }
   end
 
   test 'invalid user smtp settings' do

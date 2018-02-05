@@ -1,2 +1,2 @@
 <%= @email.plain_text %>
-http://localhost:3000/subscription/<%= @base_id %>Unsubscribe Link
+http://<%= SubscribeMailer.default_url_options[:host] %>/subscription/<%= @base_id %>Unsubscribe Link

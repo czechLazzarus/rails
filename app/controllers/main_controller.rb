@@ -1,5 +1,3 @@
+#Main Controller
 class MainController < ApplicationController
-
-  def index
-  end
 end

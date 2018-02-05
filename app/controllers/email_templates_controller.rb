@@ -1,3 +1,4 @@
+# Email template Controller
 class EmailTemplatesController < ApplicationController
   before_action :set_email_template, only: %i[edit update destroy]
 
@@ -31,7 +32,7 @@ class EmailTemplatesController < ApplicationController
     respond_to do |format|
       if @email_template.save
         update_contact_category
-        format.html { redirect_to @email_template, notice: 'Email template was successfully created.' }
+        format.html { redirect_to @email_template, notice: 'Email template was created.' }
       else
         format.html { render :new }
         format.json { render json: @email_template.errors, status: :unprocessable_entity }
@@ -45,7 +46,7 @@ class EmailTemplatesController < ApplicationController
     respond_to do |format|
       if @email_template.update(email_template_params)
         update_contact_category
-        format.html { redirect_to @email_template, notice: 'Email template was successfully updated.' }
+        format.html { redirect_to @email_template, notice: 'Email template was updated.' }
       else
         format.html { render :edit }
         format.json { render json: @email_template.errors, status: :unprocessable_entity }
@@ -58,13 +59,13 @@ class EmailTemplatesController < ApplicationController
   def destroy
     @email_template.destroy
     respond_to do |format|
-      format.html { redirect_to email_templates_url, notice: 'Email template was successfully destroyed.' }
+      format.html { redirect_to email_templates_url, notice: 'Email template was destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_email_template
     @email_template = EmailTemplate.find(params[:id])
   end
@@ -73,7 +74,6 @@ class EmailTemplatesController < ApplicationController
     CategoriesEmailTemplate.where(email_template_id: @email_template.id).delete_all
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def email_template_params
     params.require(:email_template).permit(:subject, :text, :sender)
   end

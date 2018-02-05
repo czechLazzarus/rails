@@ -1,3 +1,4 @@
+# User Controller
 class UsersController < ApplicationController
   before_action :set_user, only: %i[edit update destroy]
   skip_before_action :require_login , only: %i[new create]
@@ -21,10 +22,6 @@ class UsersController < ApplicationController
     redirect_to action: 'edit'
   end
 
-  # GET /users/1/edit
-  def edit
-  end
-
   # POST /users
   # POST /users.json
   def create
@@ -33,7 +30,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html { redirect_to action: 'edit', id: @user.id, notice: 'User was successfully created.' }
+        format.html { redirect_to action: 'edit', id: @user.id, notice: 'User was created.' }
         format.json { render main, status: :created, location: @user }
       else
         format.html { render :new }
@@ -52,7 +49,7 @@ class UsersController < ApplicationController
       end
 
       if @user.update(user_params)
-        format.html { render :edit, notice: 'User was successfully updated.' }
+        format.html { render :edit, notice: 'User was updated.' }
         format.json { render :edit, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -66,18 +63,17 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User was destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_user
     @user = User.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:username, :firstname, :surname, :password, :password_confirmation, :user_smtp_id)
   end

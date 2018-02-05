@@ -1,5 +1,6 @@
 require 'base64'
 
+# Subscribe Mailer
 module SubscribeMailerHelper
   def configure_mailer(user_smtp)
     { user_name: user_smtp.username,

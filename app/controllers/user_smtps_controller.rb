@@ -1,5 +1,6 @@
 require 'base64'
 
+# UserSmtp Controller
 class UserSmtpsController < ApplicationController
   before_action :set_user_smtp, only: %i[edit update destroy]
 
@@ -20,10 +21,6 @@ class UserSmtpsController < ApplicationController
     @user_smtp = UserSmtp.new
   end
 
-  # GET /user_smtps/1/edit
-  def edit
-  end
-
   # POST /user_smtps
   # POST /user_smtps.json
   def create
@@ -31,7 +28,7 @@ class UserSmtpsController < ApplicationController
     @user_smtp.password= Base64.encode64(@user_smtp.password)
     respond_to do |format|
       if @user_smtp.save
-        format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully created.' }
+        format.html { redirect_to user_smtps_url, notice: 'User smtp was created.' }
         format.json { render :index, status: :created }
       else
         format.html { render :new }
@@ -46,7 +43,7 @@ class UserSmtpsController < ApplicationController
     respond_to do |format|
       base64_password = Base64.encode64(user_smtp_params['password'])
       if @user_smtp.update(user_smtp_params.merge(password: base64_password))
-        format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully updated.' }
+        format.html { redirect_to user_smtps_url, notice: 'User smtp was updated.' }
         format.json { render :index, status: :ok }
       else
         format.html { render :edit }
@@ -60,18 +57,17 @@ class UserSmtpsController < ApplicationController
   def destroy
     @user_smtp.destroy
     respond_to do |format|
-      format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully destroyed.'}
+      format.html { redirect_to user_smtps_url, notice: 'User smtp was destroyed.'}
       format.json { head :no_content }
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_user_smtp
     @user_smtp = UserSmtp.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def user_smtp_params
     params.require(:user_smtp).permit(:username, :smtp, :port, :protocol, :password, :email, :user_id)
   end

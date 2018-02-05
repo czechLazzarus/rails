@@ -4,18 +4,18 @@ class UserSmtpsTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = users(:testuser)
-    post login_path, params: { session: { username:  @user.username, password: '123456' } }
+    post login_path, params: { session: { username: @user.username, password: '123456' } }
   end
 
   test 'invalid user smtp settings' do
     get user_smtps_path
     assert_no_difference 'UserSmtp.count' do
       post user_smtps_path, params: { user_smtp: { username:  '',
-                                         smtp:  '',
-                                         port: '',
-                                         email: '',
-                                         protocol: '',
-                                         password: '' } }
+                                                   smtp:  '',
+                                                   port: '',
+                                                   email: '',
+                                                   protocol: '',
+                                                   password: '' } }
     end
     assert_template 'user_smtps/new'
   end

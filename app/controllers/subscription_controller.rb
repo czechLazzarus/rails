@@ -1,5 +1,6 @@
 require 'base64'
 
+#Subscription controller
 class SubscriptionController < ApplicationController
   skip_before_action :require_login
   layout 'subscription'

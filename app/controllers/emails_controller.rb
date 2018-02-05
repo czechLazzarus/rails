@@ -1,10 +1,11 @@
+#Email Controller
 class EmailsController < ApplicationController
   before_action :set_email, only: [:edit, :update, :destroy]
   include EmailsHelper
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.paginate(:page => params[:page], :per_page => 10)
+    @emails = Email.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /emails/1
@@ -16,10 +17,6 @@ class EmailsController < ApplicationController
   # GET /emails/new
   def new
     @email = Email.new
-  end
-
-  # GET /emails/1/edit
-  def edit
   end
 
   # POST /emails
@@ -47,7 +44,7 @@ class EmailsController < ApplicationController
     respond_to do |format|
       if @email.save
         build_emails
-        format.html {redirect_to emails_url, notice: 'Email was successfully updated.'}
+        format.html {redirect_to emails_url, notice: 'Email was updated.'}
         format.json {render :index, status: :ok }
       else
         format.html {render :edit}
@@ -62,7 +59,7 @@ class EmailsController < ApplicationController
     remove_email_dependencies
     @email.destroy
     respond_to do |format|
-      format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
+      format.html { redirect_to emails_url, notice: 'Email was destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,25 +70,25 @@ class EmailsController < ApplicationController
   end
 
   def build_emails
-    @categoriesTemplates = CategoriesEmailTemplate.where(:email_template_id => @email_template.id)
-    @categoriesTemplates.collect do |value|
-      @contactCategory = CategoriesContact.where(:category_id => value.category_id)
-      @contactCategory.collect do |value2|
-        unless ContactsEmail.where(:contact_id => value2.contact_id, :email_id => @email.id).any?
-          @contactEmail = ContactsEmail.new
-          @contactEmail.contact_id = value2.contact_id
-          @contactEmail.email_id = @email.id
-          @contactEmail.user_id = current_user.id
-          @contactEmail.sended = false
-          @contactEmail.error = false
-          @contactEmail.save
+    @categories_templates = CategoriesEmailTemplate.where(email_template_id: @email_template.id)
+    @categories_templates.collect do |value|
+      @contact_category = CategoriesContact.where(category_id: value.category_id)
+      @contact_category.collect do |value2|
+        unless ContactsEmail.where(contact_id: value2.contact_id, email_id: @email.id).any?
+          @contact_email = ContactsEmail.new
+          @contact_email.contact_id = value2.contact_id
+          @contact_email.email_id = @email.id
+          @contact_email.user_id = current_user.id
+          @contact_email.sended = false
+          @contact_email.error = false
+          @contact_email.save
         end
       end
     end
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_email
     @email = Email.find(params[:id])
   end
@@ -99,8 +96,7 @@ class EmailsController < ApplicationController
   def remove_email_dependencies
     ContactsEmail.where(email_id: @email.id).destroy_all
   end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
+  
   def email_params
     params.require(:email).permit(:email_template_id)
   end
