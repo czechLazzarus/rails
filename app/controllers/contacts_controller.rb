@@ -4,7 +4,7 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /contacts/1
@@ -28,8 +28,8 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.save
         update_contact_category
-        format.html { redirect_to @contact, notice: 'Contact was successfully created.' }
-        format.json { render :show, status: :created, location: @contact }
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @contact.errors, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class ContactsController < ApplicationController
     respond_to do |format|
       if @contact.update(contact_params)
         update_contact_category
-        format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
+        format.html { redirect_to contacts_url, notice: 'Contact was successfully updated.' }
         format.json { render :index, status: :ok }
       else
         format.html { render :edit }

@@ -5,7 +5,6 @@ one:
   text: MyString
   plain_text: MyString
   sender: MyString
-  footer: MyString
   user_id: 1
 
 two:
@@ -13,5 +12,4 @@ two:
   text: MyString
   plain_text: MyString
   sender: MyString
-  footer: MyString
   user_id: 1

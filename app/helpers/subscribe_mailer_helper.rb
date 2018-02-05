@@ -1,7 +1,9 @@
+require 'base64'
+
 module SubscribeMailerHelper
   def configure_mailer(user_smtp)
     { user_name: user_smtp.username,
-      password: user_smtp.password,
+      password: Base64.decode64(user_smtp.password),
       port: user_smtp.port,
       address: user_smtp.smtp,
       authentication: 'plain',

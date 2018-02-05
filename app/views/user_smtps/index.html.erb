@@ -9,7 +9,6 @@
       <th>Smtp</th>
       <th>Port</th>
       <th>Protocol</th>
-      <th>Password</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,8 +20,6 @@
         <td><%= user_smtp.smtp %></td>
         <td><%= user_smtp.port %></td>
         <td><%= user_smtp.protocol %></td>
-        <td><%= user_smtp.password %></td>
-        <td><%= link_to 'Show', user_smtp %></td>
         <td><%= link_to 'Edit', edit_user_smtp_path(user_smtp) %></td>
         <td><%= link_to 'Destroy', user_smtp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

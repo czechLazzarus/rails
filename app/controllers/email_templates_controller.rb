@@ -4,7 +4,7 @@ class EmailTemplatesController < ApplicationController
   # GET /email_templates
   # GET /email_templates.json
   def index
-    @email_templates = EmailTemplate.all
+    @email_templates = EmailTemplate.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /categories/1

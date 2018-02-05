@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /categories/new
@@ -30,7 +30,7 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       if @category.save
         format.html { redirect_to categories_url, notice: 'Category was successfully created.' }
-        format.json { render :index, status: :created, location: @category }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @category.errors, status: :unprocessable_entity }
@@ -43,8 +43,8 @@ class CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        format.json { render :index, status: :ok, location: @category }
+        format.html { redirect_to categories_url, notice: 'Category was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @category.errors, status: :unprocessable_entity }

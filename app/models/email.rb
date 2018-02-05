@@ -1,4 +1,5 @@
 class Email < ApplicationRecord
+  has_and_belongs_to_many :contacts
   def fill_email_by_template(template, user_id)
     self.text = template.text
     self.subject = template.subject

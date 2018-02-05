@@ -1,15 +1,16 @@
 class EmailsController < ApplicationController
-  before_action :set_email, only: [:show, :edit, :update, :destroy]
+  before_action :set_email, only: [:edit, :update, :destroy]
   include EmailsHelper
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails = Email.paginate(:page => params[:page], :per_page => 10)
   end
 
   # GET /emails/1
   # GET /emails/1.json
   def show
+    redirect_to action: "edit"
   end
 
   # GET /emails/new
@@ -29,8 +30,8 @@ class EmailsController < ApplicationController
     respond_to do |format|
       if @email.save
         build_emails
-        format.html {redirect_to @email, notice: 'Email was successfully created.'}
-        format.json {render :show, status: :created, location: @email}
+        format.html {redirect_to emails_url, notice: 'Email was successfully created.'}
+        format.json {render :index, status: :created}
       else
         format.html {render :new}
         format.json {render json: @email.errors, status: :unprocessable_entity}
@@ -46,7 +47,7 @@ class EmailsController < ApplicationController
     respond_to do |format|
       if @email.save
         build_emails
-        format.html {redirect_to @email, notice: 'Email was successfully updated.'}
+        format.html {redirect_to emails_url, notice: 'Email was successfully updated.'}
         format.json {render :index, status: :ok }
       else
         format.html {render :edit}
@@ -61,8 +62,8 @@ class EmailsController < ApplicationController
     remove_email_dependencies
     @email.destroy
     respond_to do |format|
-      format.html {redirect_to emails_url, notice: 'Email was successfully destroyed.'}
-      format.json {head :no_content}
+      format.html { redirect_to emails_url, notice: 'Email was successfully destroyed.' }
+      format.json { head :no_content }
     end
   end
 

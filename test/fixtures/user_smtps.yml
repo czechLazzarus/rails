@@ -5,11 +5,13 @@ one:
   smtp: MyString
   port: 1
   protocol: MyString
+  email: test2@test.cz
   password: MyString
 
 two:
-  username: MyString
-  smtp: MyString
-  port: 1
-  protocol: MyString
-  password: MyString
+  username: MyString2
+  smtp: MyString2
+  port: 2
+  protocol: MyString2
+  email: test@test.cz
+  password: MyString2

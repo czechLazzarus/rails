@@ -1,5 +1,7 @@
+require 'base64'
+
 class UserSmtpsController < ApplicationController
-  before_action :set_user_smtp, only: %i[show edit update destroy]
+  before_action :set_user_smtp, only: %i[edit update destroy]
 
   # GET /user_smtps
   # GET /user_smtps.json
@@ -10,6 +12,7 @@ class UserSmtpsController < ApplicationController
   # GET /user_smtps/1
   # GET /user_smtps/1.json
   def show
+    redirect_to action: "index"
   end
 
   # GET /user_smtps/new
@@ -25,11 +28,11 @@ class UserSmtpsController < ApplicationController
   # POST /user_smtps.json
   def create
     @user_smtp = UserSmtp.new(user_smtp_params.merge(user_id: current_user.id))
-
+    @user_smtp.password= Base64.encode64(@user_smtp.password)
     respond_to do |format|
       if @user_smtp.save
-        format.html { redirect_to @user_smtp, notice: 'User smtp was successfully created.' }
-        format.json { render :show, status: :created, location: @user_smtp }
+        format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully created.' }
+        format.json { render :index, status: :created }
       else
         format.html { render :new }
         format.json { render json: @user_smtp.errors, status: :unprocessable_entity }
@@ -41,9 +44,10 @@ class UserSmtpsController < ApplicationController
   # PATCH/PUT /user_smtps/1.json
   def update
     respond_to do |format|
-      if @user_smtp.update(user_smtp_params.merge(user_id: current_user.id))
-        format.html { redirect_to @user_smtp, notice: 'User smtp was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user_smtp }
+      base64_password = Base64.encode64(user_smtp_params['password'])
+      if @user_smtp.update(user_smtp_params.merge(password: base64_password))
+        format.html { redirect_to user_smtps_url, notice: 'User smtp was successfully updated.' }
+        format.json { render :index, status: :ok }
       else
         format.html { render :edit }
         format.json { render json: @user_smtp.errors, status: :unprocessable_entity }

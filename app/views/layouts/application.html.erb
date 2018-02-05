@@ -21,12 +21,8 @@
   <script>
       $(function() {
           $('.froala').froalaEditor({
-              // Set the image upload URL.
-              imageUploadURL: '/upload_image',
+              image_upload: false
 
-              imageUploadParams: {
-                  id: 'my_editor'
-              }
           })
       });
   </script>

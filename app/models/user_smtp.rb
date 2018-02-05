@@ -3,6 +3,7 @@ class UserSmtp < ApplicationRecord
   validates :username,  presence: true, length: { maximum: 100 }
   validates :port, numericality: { only_integer: true }
   validates :protocol,  presence: true, length: { maximum: 100 }
+  validates :password,  presence: true, length: { maximum: 240 }
   validates :smtp,  presence: true, length: { maximum: 100 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: false, length: { maximum: 255 },

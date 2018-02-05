@@ -31,7 +31,7 @@ class UserSmtpsTest < ActionDispatch::IntegrationTest
                                                    password: 'teewqst', } }
     end
     follow_redirect!
-    assert_template 'user_smtps/show'
+    assert_template 'user_smtps/index'
     assert is_logged_in?
 
   end

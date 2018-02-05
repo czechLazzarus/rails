@@ -3,9 +3,10 @@
 one:
   surname: MyString
   name: MyString
-  email: MyString
+  email: test@test.com
 
 two:
   surname: MyString
   name: MyString
-  email: MyString
+  email: test2@test.com
+

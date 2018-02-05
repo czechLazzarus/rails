@@ -1,4 +1,9 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="text-left">
+    <span class="text-info"> Emails: <%= ContactsEmail.where(:user_id => current_user.id).count %></span> ||
+    <span class="text-info"> Sended: <%= ContactsEmail.where(:user_id => current_user.id, sended: true).count %></span> ||
+    <span class="text-info"> Cancelled with error: <%= ContactsEmail.where(:user_id => current_user.id, error: true).count %> </span>
+  </div>
   <div class="container">
     <nav>
       <ul class="nav navbar-nav navbar-right">

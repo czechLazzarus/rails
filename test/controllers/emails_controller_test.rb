@@ -23,12 +23,7 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
       post emails_url, params: { email: { plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id, email_template_id: @email_template.id } }
     end
 
-    assert_redirected_to email_url(Email.last)
-  end
-
-  test "should show email" do
-    get email_url(@email)
-    assert_response :success
+    assert_redirected_to emails_url
   end
 
   test "should get edit" do
@@ -38,7 +33,7 @@ class EmailsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update email" do
     patch email_url(@email), params: { email: { plain_text: @email.plain_text, sender: @email.sender, subject: @email.subject, text: @email.text, user_id: @email.user_id, email_template_id: @email_template.id } }
-    assert_redirected_to email_url(@email)
+    assert_redirected_to emails_url
   end
 
   test "should destroy email" do
