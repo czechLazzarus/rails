@@ -7,7 +7,7 @@ one:
   port: 1
   protocol: MyString
   email: test2@test.cz
-  password: MyString
+  password: dGVzdA==
   user_id: 1
 
 two:

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="test.sql" id="Project_423ffc5" template="Default" database="MySql" >
+	<schema name="Default" schemaname="Default" >
+		<table name="&quot;ar_internal_metadata&quot;" >
+			<column name="&quot;key&quot;" type="varchar" jt="12" mandatory="y" />
+			<column name="&quot;value&quot;" type="varchar" jt="12" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+		</table>
+		<table name="&quot;categories&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;name&quot;" type="varchar" jt="12" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;user_id&quot;" type="year" jt="4" />
+			<fk name="fk_&quot;categories&quot;_&quot;users&quot;" virtual="y" to_schema="Default" to_table="&quot;users&quot;" >
+				<fk_column name="&quot;user_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;categories&quot;" />
+		<table name="&quot;categories_contacts&quot;" >
+			<column name="&quot;contact_id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;category_id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<fk name="fk_&quot;categories_contacts&quot;_&quot;categories&quot;" virtual="y" to_schema="Default" to_table="&quot;categories&quot;" >
+				<fk_column name="&quot;category_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+			<fk name="fk_&quot;categories_contacts&quot;_&quot;contacts&quot;" virtual="y" to_schema="Default" to_table="&quot;contacts&quot;" >
+				<fk_column name="&quot;contact_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;categories_contacts&quot;" />
+		<table name="&quot;categories_contacts&quot;" />
+		<table name="&quot;categories_email_templates&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;email_template_id&quot;" type="year" jt="4" />
+			<column name="&quot;category_id&quot;" type="year" jt="4" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<fk name="fk_&quot;categories_email_templates&quot;_&quot;categories&quot;" virtual="y" to_schema="Default" to_table="&quot;categories&quot;" >
+				<fk_column name="&quot;category_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+			<fk name="fk_&quot;categories_email_templates&quot;_&quot;email_templates&quot;" virtual="y" to_schema="Default" to_table="&quot;email_templates&quot;" >
+				<fk_column name="&quot;email_template_id&quot;" pk="`id`" />
+			</fk>
+		</table>
+		<table name="&quot;contacts&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;surname&quot;" type="varchar" jt="12" />
+			<column name="&quot;name&quot;" type="varchar" jt="12" />
+			<column name="&quot;email&quot;" type="varchar" jt="12" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+		</table>
+		<table name="&quot;contacts_emails&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;email_id&quot;" type="year" jt="4" />
+			<column name="&quot;contact_id&quot;" type="year" jt="4" />
+			<column name="&quot;sended&quot;" type="boolean" jt="2" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;user_id&quot;" type="year" jt="4" />
+			<column name="&quot;error&quot;" type="boolean" jt="2" />
+			<fk name="fk_&quot;contacts_emails&quot;_&quot;contacts&quot;" virtual="y" to_schema="Default" to_table="&quot;contacts&quot;" >
+				<fk_column name="&quot;contact_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+			<fk name="fk_&quot;contacts_emails&quot;_&quot;emails&quot;" virtual="y" to_schema="Default" to_table="&quot;emails&quot;" >
+				<fk_column name="&quot;email_id&quot;" pk="`id`" />
+			</fk>
+			<fk name="fk_&quot;contacts_emails&quot;_&quot;users&quot;" virtual="y" to_schema="Default" to_table="&quot;users&quot;" >
+				<fk_column name="&quot;user_id&quot;" pk="&quot;id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;email_templates&quot;" >
+			<column name="`id`" type="year" jt="4" mandatory="y" />
+			<column name="`subject`" type="varchar" jt="12" />
+			<column name="`text`" type="text" jt="-1" />
+			<column name="`sender`" type="varchar" jt="12" />
+			<column name="`user_id`" type="year" jt="4" />
+			<column name="`created_at`" type="datetime" jt="93" mandatory="y" />
+			<column name="`updated_at`" type="datetime" jt="93" mandatory="y" />
+			<index name="idx_&quot;email_templates&quot;_`id`" unique="UNIQUE" >
+				<column name="`id`" />
+			</index>
+			<fk name="fk_&quot;email_templates&quot;_&quot;users&quot;" virtual="y" to_schema="Default" to_table="&quot;users&quot;" >
+				<fk_column name="`user_id`" pk="&quot;id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;emails&quot;" >
+			<column name="`id`" type="year" jt="4" mandatory="y" />
+			<column name="`subject`" type="varchar" jt="12" />
+			<column name="`text`" type="varchar" jt="12" />
+			<column name="`plain_text`" type="varchar" jt="12" />
+			<column name="`sender`" type="varchar" jt="12" />
+			<column name="`user_id`" type="year" jt="4" />
+			<column name="`created_at`" type="datetime" jt="93" mandatory="y" />
+			<column name="`updated_at`" type="datetime" jt="93" mandatory="y" />
+			<fk name="fk_&quot;emails&quot;_&quot;users&quot;" virtual="y" to_schema="Default" to_table="&quot;users&quot;" >
+				<fk_column name="`user_id`" pk="&quot;id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;schema_migrations&quot;" >
+			<column name="&quot;version&quot;" type="varchar" jt="12" mandatory="y" />
+		</table>
+		<table name="&quot;user_smtps&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;username&quot;" type="varchar" jt="12" />
+			<column name="&quot;smtp&quot;" type="varchar" jt="12" />
+			<column name="&quot;port&quot;" type="year" jt="4" />
+			<column name="&quot;protocol&quot;" type="varchar" length="10" jt="12" />
+			<column name="&quot;password&quot;" type="varchar" jt="12" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;user_id&quot;" type="year" jt="4" />
+			<column name="&quot;email&quot;" type="varchar" jt="12" />
+			<fk name="fk_&quot;user_smtps&quot;_&quot;users&quot;" virtual="y" to_schema="Default" to_table="&quot;users&quot;" >
+				<fk_column name="&quot;id&quot;" pk="&quot;user_smtp_id&quot;" />
+			</fk>
+		</table>
+		<table name="&quot;user_smtps&quot;" />
+		<table name="&quot;users&quot;" >
+			<column name="&quot;id&quot;" type="year" jt="4" mandatory="y" />
+			<column name="&quot;username&quot;" type="varchar" jt="12" />
+			<column name="&quot;firstname&quot;" type="varchar" jt="12" />
+			<column name="&quot;surname&quot;" type="varchar" jt="12" />
+			<column name="&quot;created_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;updated_at&quot;" type="datetime" jt="93" mandatory="y" />
+			<column name="&quot;password_digest&quot;" type="varchar" jt="12" />
+			<column name="&quot;user_smtp_id&quot;" type="year" jt="4" />
+		</table>
+		<table name="&quot;users&quot;" />
+		<table name="&quot;users&quot;" />
+	</schema>
+	<layout name="Parsed Script Layout" id="Layout_10e15a8" show_relation="columns" >
+		<entity schema="Default" name="&quot;users&quot;" color="c8f5bf" x="690" y="105" />
+		<entity schema="Default" name="&quot;user_smtps&quot;" color="c8f5bf" x="945" y="90" />
+		<entity schema="Default" name="&quot;contacts&quot;" color="f5ddbf" x="45" y="285" />
+		<entity schema="Default" name="&quot;categories_contacts&quot;" color="bfd4f5" x="570" y="465" />
+		<entity schema="Default" name="&quot;categories&quot;" color="bfd4f5" x="795" y="345" />
+		<entity schema="Default" name="&quot;email_templates&quot;" color="f5ddbf" x="360" y="465" />
+		<entity schema="Default" name="&quot;contacts_emails&quot;" color="f5ddbf" x="255" y="270" />
+		<entity schema="Default" name="&quot;emails&quot;" color="f5ddbf" x="255" y="45" />
+		<entity schema="Default" name="&quot;categories_email_templates&quot;" color="bfd4f5" x="495" y="285" />
+	</layout>
+</project>

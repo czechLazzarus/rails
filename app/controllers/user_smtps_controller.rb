@@ -13,7 +13,7 @@ class UserSmtpsController < ApplicationController
   # GET /user_smtps/1
   # GET /user_smtps/1.json
   def show
-    redirect_to action: "index"
+    redirect_to action: 'index'
   end
 
   # GET /user_smtps/new
